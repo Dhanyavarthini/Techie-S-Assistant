@@ -28,7 +28,7 @@ This project is a **GenAI-based application** designed to assist users in resolv
 
 **Install and update pip**:
    ```bash
-cd ai-starter-kit/search_assistant
+cd Techie-S-Assistant\search_assistant
 python -m venv search_assistant_env
 search_assistant_env\Scripts\activate
 pip install -r requirements.txt
