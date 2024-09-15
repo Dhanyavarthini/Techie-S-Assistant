@@ -1,0 +1,112 @@
+[build-system]
+requires = ["setuptools>=67", "wheel>=0.40", "hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sambanova-generative-data-prep"
+description = "Prepare data that can be used to train generative models."
+readme = "README.md"
+requires-python = ">=3.8.16"
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "h5py",
+    "jsonlines",
+    "numpy",
+    "psutil",
+    "torch>=2.3",
+    "tqdm",
+    "transformers",
+    "tabulate",
+    "gitpython",
+    "types-tabulate",
+    "alive_progress",
+    "pydantic",
+    "pyyaml",
+    "sentencepiece"
+]
+dynamic = ["version"]
+
+[tool.setuptools.packages.find]
+where = ["generative_data_prep"]
+
+# Configure Pytest for testing Python code
+[tool.pytest.ini_options]
+pythonpath = [
+    "."
+]
+minversion = "7.0"
+markers = [
+    "fast",
+    "slow",
+]
+filterwarnings = [
+    "error",
+    # TODO: Fix the Warning and remove this ignore line
+    "ignore:unclosed file.*io.TextIOWrapper.*:ResourceWarning",
+    "ignore:Pydantic V1 style.*validators are deprecated.*:pydantic.warnings.PydanticDeprecatedSince20",
+    "ignore:`resume_download` is deprecated:FutureWarning",
+]
+addopts = """
+-ra -q -vv
+--doctest-modules
+--durations=50
+--html=test_reports/report.html
+--junitxml=test_reports/circleci/pytest/junit.xml
+--cov=generative_data_prep
+--cov-branch
+--cov-report term
+--cov-report html:test_reports/coverage/pytest_cov.html
+--cov-report xml:test_reports/coverage/pytest_cov.xml
+"""
+testpaths = [
+    "tests",
+]
+junit_suite_name = "Pytest"
+junit_duration_report = "call"
+
+# Configure isort for sorting imports automatically
+[tool.isort]
+profile = "black"
+known_first_party = ["sambanova_*"]
+
+[tool.bandit]
+exclude_dirs = [
+    "tests",
+]
+
+# Configure mypy for type-checking in Python code
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+exclude = [
+    "tests",
+    "docs",
+]
+# Need this otherwise mypy complains it can't interpret the types of objects
+# from 3rd party libraries like transformers
+ignore_missing_imports = true
+
+# Configure black for python code formatting
+[tool.black]
+line-length = 120
+
+# Configure hatch for python builds
+[tool.hatch]
+version.source = "vcs"
+build.include = [
+    "generative_data_prep/**",
+    "requirements/**",
+    "pyproject.toml",
+    "setup.cfg",
+    "README.rst"
+]
+build.exclude = [
+    ".github/**",
+    "tests/**",
+    "docs/**",
+    ".gitignore",
+    ".pre-commit-config.yaml"
+]
