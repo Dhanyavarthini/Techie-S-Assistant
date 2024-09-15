@@ -17,7 +17,7 @@ This project is a **GenAI-based application** designed to assist users in resolv
 ### Installation
 **Clone the repository**:
    ```bash
-   git clone https://github.com/your-repo-name/project-name.git
+   git clone https://github.com/Dhanyavarthini/Techie-S-Assistant.git
    ```
 **Setup API keys**:
    Create a `.env` file in the root directory and add the following keys:
