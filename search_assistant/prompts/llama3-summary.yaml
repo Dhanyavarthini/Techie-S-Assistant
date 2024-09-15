@@ -1,0 +1,17 @@
+_type: prompt
+input_types: {}
+input_variables:
+- summary
+- new_lines
+name: null
+output_parser: null
+partial_variables: {}
+template: "<|begin_of_text|><|start_header_id|>system<|end_header_id|> Progressively summarize the lines of conversation provided, focusing on the technical issue being discussed and the corresponding solutions or troubleshooting steps. The new summary should concisely reflect the conversation's progression, particularly any problems identified and actions taken to resolve them.\n\n\
+  \ EXAMPLE\nCurrent summary:\nThe user asks how to troubleshoot a slow internet connection. The assistant suggests restarting the router and checking for software updates.\n\n\
+  \ New lines of conversation:\nUser: I've restarted the router, but the internet is still slow.\n\
+  \ Assistant: Try checking your internet speed and contacting your ISP if the issue persists.\n\n\
+  \ New summary:\nThe user asks how to troubleshoot a slow internet connection. The assistant suggests restarting the router, checking for software updates, and testing the internet speed if the problem persists.\nEND OF EXAMPLE\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\
+  \ Current summary: {summary} \n\n New Lines of conversation: {new_lines} <|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\
+  \ New summary: "
+template_format: f-string
+validate_template: false

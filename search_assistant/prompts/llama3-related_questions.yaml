@@ -1,0 +1,20 @@
+_type: prompt
+input_types: {}
+input_variables:
+  - question
+  - format_instructions
+name: null
+output_parser: null
+partial_variables: {}
+template: |
+  <|begin_of_text|><|start_header_id|>system<|end_header_id|>Given the following technical support question from a user that will be answered by searching in a search engine:
+  \n
+  <|eot_id|><|start_header_id|>user<|end_header_id|>
+  {question}.
+  \n
+  Generate between 2 and 4 additional technical support-related questions that might help the user troubleshoot or understand the issue better:
+  \n
+  {format_instructions}
+  <|eot_id|><|start_header_id|>assistant<|end_header_id|>
+template_format: f-string
+validate_template: false
